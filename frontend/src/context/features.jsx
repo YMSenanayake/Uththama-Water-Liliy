@@ -10,15 +10,15 @@ const Features = () => {
                 <div><img src={assets.features2} alt="" height={77} width={222} className='rounded-full' /></div>
                 <div className='p-4'>
                     <h4 className='h4 capitalize'>Quality Plants</h4>
-                    <p>Freshly grown water br lilies, delivered with care. </p>
+                    <p>Freshly grown water lilies, delivered with care. </p>
                 </div>
                 <div className='p-4'>
                     <h4 className='h4 capitalize'>Fast Delivery</h4>
-                    <p>Freshly grown water br lilies, delivered with care. </p>
+                    <p>Freshly grown water lilies, delivered with care. </p>
                 </div>
                 <div className='p-4'>
                     <h4 className='h4 capitalize'>Secure Payment</h4>
-                    <p>Freshly grown water br lilies, delivered with care. </p>
+                    <p>Freshly grown water lilies, delivered with care. </p>
                 </div>
             </div>
         </section>

@@ -8,6 +8,7 @@ const AppContext = createContext()
 export const AppContextProvider = ({ children }) => {
 
 const [products, setProducts] = useState([])
+const [searchQuery, setSearchQuery] = useState("")
     const navigate = useNavigate()
     const currency = import.meta.env.VITE_CURRENCY
     const {user} = useUser()
@@ -21,7 +22,7 @@ const [products, setProducts] = useState([])
         fetchProducts()
     }, [])
 
-    const value = { navigate, user, products, currency }
+    const value = { navigate, user, products, currency, searchQuery, setSearchQuery }
     return (
         <AppContext.Provider value={value}>{children}</AppContext.Provider>
 
