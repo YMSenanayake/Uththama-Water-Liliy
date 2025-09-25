@@ -16,6 +16,7 @@ import right from "./right.svg";
 import pin from "./pin.svg";
 import star from "./star.svg";
 import facebook from "./facebook.svg";
+import Tiktok from "./tiktok.png";
 import instagram from "./instagram.svg";
 import twitter from "./twitter.svg";
 import linkedin from "./linkedin.svg";
@@ -128,6 +129,7 @@ export const assets = {
   pin,
   star,
   facebook,
+  Tiktok,
   instagram,
   twitter,
   linkedin,
