@@ -7,7 +7,7 @@ import SearchInput from '../components/SearchInput'
 const Collection = () => {
 
   const { products, searchQuery } = useAppContext()
-  const [ category, setCategory ] = useState([])
+  const [category, setCategory] = useState([])
   const [type, setType] = useState([])
   const [selectedSort, setSelectedSort] = useState("relevant")
   const [filteredProducts, setFilteredProducts] = useState([])
@@ -114,14 +114,14 @@ const Collection = () => {
               ))}
             </div>
           </div>
-          <div className='pl-5 mt-4 bg-white rounded-xl'>
+          <div className='pl-5 py-3 mt-4 bg-white rounded-xl'>
             <h5 className='h5 mb-4'>Types</h5>
             <div className='flex flex-col gap-2 text-sm font-light'>
-              {availableTypes.map((typ)=>(
-              <label key={typ} className='flex gap-2 medium-14 text-gray-30'>
-                <input onChange={(e) => toggleFilter(e.target.value, setType)} type='checkbox' value={typ} checked={type.includes(typ)} className='w-3'/>
-                {typ}
-              </label>
+              {availableTypes.map((typ) => (
+                <label key={typ} className='flex gap-2 medium-14 text-gray-30'>
+                  <input onChange={(e) => toggleFilter(e.target.value, setType)} type='checkbox' value={typ} checked={type.includes(typ)} className='w-3' />
+                  {typ}
+                </label>
               ))}
             </div>
           </div>
@@ -136,6 +136,21 @@ const Collection = () => {
             ) : (
               <p className="capitalize">No products found for selected filters.</p>
             )}
+          </div>
+          {/* pagination */}
+          <div className='flexCenter flex flex-wrap mt-14 mb-10 gap-4'>
+            <button disabled={currentPage === 1} onClick={()=> setCurrentPage((prev)=> prev - 1)} 
+            className={`btn-secondary !py-1 !px-3 ${currentPage === 1 && "opacity-50 cursor-not-allowed"}`}>
+              Previous
+            </button>
+            {Array.from({ length: totalPages }, (_, index) => (
+              <button key={index + 1}  onClick={()=> setCurrentPage(index + 1)} 
+            className={`btn-light !py-1 !px-3 ${currentPage === index + 1 && "bg-tertiary text-white"}`}>{index + 1}</button>
+            ))}
+            <button disabled={currentPage === totalPages} onClick={()=> setCurrentPage((prev)=> prev + 1)} 
+            className={`btn-secondary !py-1 !px-3 ${currentPage === totalPages && "opacity-50 cursor-not-allowed"}`}>
+              Next
+            </button>
           </div>
         </div>
       </div>

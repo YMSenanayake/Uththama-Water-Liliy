@@ -28,7 +28,7 @@ const Item = ({ product }) => {
                     <div className='absolute bottom-1 left-1 right-1 hidden group-hover:block'>
                         <button
                             onClick={() => {
-                                navigate(`/products/${product._id}`);
+                                navigate(`/collection/${product._id}`);
                                 scrollTo(0, 0);
                             }}
                             className = 'btn-secondary !py-2 !px-0 w-full !text-xs'
