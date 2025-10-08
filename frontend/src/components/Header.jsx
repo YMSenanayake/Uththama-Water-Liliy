@@ -8,7 +8,7 @@ import { useAppContext } from '../context/AppContext'
 const Header = () => {
     const [menuOpened, setMenuOpened] = useState(false)
     const { openSignIn } = useClerk()
-    const { navigate, user } = useAppContext()
+    const { navigate, user, getCartCount } = useAppContext()
 
     const toggleMenu = () => setMenuOpened(prev => !prev)
 
@@ -72,9 +72,11 @@ const Header = () => {
                             className={`absolute inset-0 lh:hidden cursor-pointer transition-opacity duration-700 ${menuOpened ? "opacity-100" : "opacity-0"}`} />
                     </div>
                     {/* Cart */}
-                    <div onClick={()=> navigate('/cart')} className="relative cursor-pointer">
+                    <div onClick={() => navigate('/cart')} className="relative cursor-pointer">
                         <img src={assets.cartAdded} alt="" className='min-w-7' />
-                        <label className="absolute bottom-7 right-0 left-0 text-xs font-bold bg-secondary/15 flexCenter rounded-full">0</label>
+                        <label className="absolute bottom-7 right-0 left-0 text-xs font-bold bg-secondary/15 flexCenter rounded-full">
+                            {getCartCount()}
+                        </label>
                     </div>
                     {/* User profile */}
                     <div className="group">
@@ -83,29 +85,29 @@ const Header = () => {
                                 <UserButton
                                     appearance={{
                                         elements: {
-                                userButtonAvatarBox: {
-                                    width: "42px",
-                                    height: "42px"
-                                }
-                            }
-                        }}
+                                            userButtonAvatarBox: {
+                                                width: "42px",
+                                                height: "42px"
+                                            }
+                                        }
+                                    }}
                                 >
-                        <UserButton.MenuItems>
-                            <UserButton.Action
-                                label='My Orders'
-                                labelIcon={<OrdersIcon />}
-                                onClick={() => navigate('/my orders')}
-                            />
-                        </UserButton.MenuItems>
-                    </UserButton>
-                    )
-                    :
-                    (<button onClick={openSignIn} className='btn-secondary flexCenter gap-2 rounded-full'>Login
-                        <img src={assets.user} alt="" className='invert w-5' />
-                    </button>)}
+                                    <UserButton.MenuItems>
+                                        <UserButton.Action
+                                            label='My Orders'
+                                            labelIcon={<OrdersIcon />}
+                                            onClick={() => navigate('/my orders')}
+                                        />
+                                    </UserButton.MenuItems>
+                                </UserButton>
+                            )
+                            :
+                            (<button onClick={openSignIn} className='btn-secondary flexCenter gap-2 rounded-full'>Login
+                                <img src={assets.user} alt="" className='invert w-5' />
+                            </button>)}
+                    </div>
                 </div>
             </div>
-        </div>
         </header >
     )
 }
