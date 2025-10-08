@@ -49,10 +49,15 @@ const Header = () => {
                         setMenuOpened={setMenuOpened}
                         containerStyles={`${menuOpened
                             ? "flex items-start flex-col gap-y-8 fixed top-25 right-6 p-5 bg-white rounded-xl shadow-md w-52 z-50"
-                            : "hidden lg:flex gap-x-5 xl:gap-x-8 medium-15 bg-secondary/10 rounded-full p-1"}`} />
+                            : "hidden lg:flex gap-x-5 xl:gap-x-10 medium-15 bg-secondary/10 rounded-full p-1"}`} />
                 </div>
                 {/* Buttons & Profile icon */}
                 <div className="flex flex-1 items-center sm:justify-end gap-x-4 sm:gap-x-8">
+                    <div>
+                        <button className='btn-outline px-2 py-1 text-xs font-semibold'>
+                            Dashboard
+                        </button>
+                    </div>
                     {/* Menu Toggle */}
                     <div className="relative lg:hidden w-7 h-6">
                         <img
@@ -67,7 +72,7 @@ const Header = () => {
                             className={`absolute inset-0 lh:hidden cursor-pointer transition-opacity duration-700 ${menuOpened ? "opacity-100" : "opacity-0"}`} />
                     </div>
                     {/* Cart */}
-                    <div className="relative cursor-pointer">
+                    <div onClick={()=> navigate('/cart')} className="relative cursor-pointer">
                         <img src={assets.cartAdded} alt="" className='min-w-7' />
                         <label className="absolute bottom-7 right-0 left-0 text-xs font-bold bg-secondary/15 flexCenter rounded-full">0</label>
                     </div>
