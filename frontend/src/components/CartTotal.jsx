@@ -58,11 +58,11 @@ const CartTotal = () => {
                 </div>
                 <div className='flex justify-between'>
                     <h5 className='h5'>Shipping Fee</h5>
-                    <p className='font-bold'>{currency}{getCartAmount() === 0 ? "Rs0.00" : `${delivery_charges}.00`}</p>
+                    <p className='font-bold'>{currency}{getCartAmount() === 0 ? "0.00" : `${delivery_charges}.00`}</p>
                 </div>
                 <div className='flex justify-between text-lg font-medium mt-3'>
                     <h4 className='h4'>Total Amount:</h4>
-                    <p className='bold-18'>{currency}{getCartAmount() === 0 ? "Rs0.00" : getCartAmount() + delivery_charges}</p>
+                    <p className='bold-18'>{currency}{getCartAmount() === 0 ? "0.00" : getCartAmount() + delivery_charges}</p>
                 </div>
                 <button className='btn-dark w-full mt-8 !rounded-md'>
                     Proceed to Order
