@@ -1,32 +1,44 @@
 import { assets } from "../assets/data";
 
 const Testimonial = () => {
-    const cardsData = [
-        {
-            image: assets.user1,
-            name: 'Briar Martin',
-            handle: '@neilstellar',
-            date: 'April 20, 2025'
-        },
-        {
-            image: assets.user2,
-            name: 'Avery Johnson',
-            handle: '@averywrites',
-            date: 'May 10, 2025'
-        },
-        {
-            image: assets.user3,
-            name: 'Jordan Lee',
-            handle: '@jordantalks',
-            date: 'June 5, 2025'
-        },
-        {
-            image: assets.user4,
-            name: 'Avery Johnson',
-            handle: '@averywrites',
-            date: 'May 10, 2025'
-        },
-    ];
+   const cardsData = [
+  {
+    image: assets.user1,
+    name: 'Briar Martin',
+    handle: '@neilstellar',
+    date: 'April 20, 2025',
+    comment: 'Radiant helped us double our online engagement in just two weeks — truly impressive!'
+  },
+  {
+    image: assets.user2,
+    name: 'Avery Johnson',
+    handle: '@averywrites',
+    date: 'May 10, 2025',
+    comment: 'Their team transformed our workflow. Everything feels smoother and faster now.'
+  },
+  {
+    image: assets.user3,
+    name: 'Jordan Lee',
+    handle: '@jordantalks',
+    date: 'June 5, 2025',
+    comment: 'From design to delivery, Radiant nailed every detail. Highly recommended!'
+  },
+  {
+    image: assets.user4,
+    name: 'Lena Carter',
+    handle: '@lenacreates',
+    date: 'July 18, 2025',
+    comment: 'We’ve tried multiple solutions, but Radiant’s service stands out — efficient and friendly.'
+  },
+  {
+    image: assets.user4,
+    name: 'Yasiru Senanayake',
+    handle: '@yasiru_dev',
+    date: 'August 2, 2025',
+    comment: 'A fantastic experience! The UI animations and support were beyond expectations.'
+  },
+];
+
 
     const CreateCard = ({ card }) => (
         <div className="p-4 rounded-lg mx-4 shadow hover:shadow-lg transition-all duration-200 w-72 shrink-0">
@@ -40,8 +52,9 @@ const Testimonial = () => {
                     <span className="text-xs text-slate-500">{card.handle}</span>
                 </div>
             </div>
-            <p className="text-sm py-4 text-gray-800">Radiant made undercutting all of our competitors an absolute
-                breeze.</p>
+
+            <p className="text-sm py-4 text-gray-800">{card.comment}</p>
+
             <div className="flex items-center justify-between text-slate-500 text-xs">
                 <div className="flex items-center gap-1">
                     <span>Posted on</span>

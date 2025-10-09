@@ -43,7 +43,7 @@ const CartTotal = () => {
                             } !py-1 text-xs cursor-pointer`}>
                             Cash On Delivery
                         </div>
-                        <div onClick={() => setMethod("strip")} className={`${method === "stripe" ? "btn-secondary" : "btn-outline"
+                        <div onClick={() => setMethod("stripe")} className={`${method === "stripe" ? "btn-secondary" : "btn-outline"
                             } !py-1 text-xs cursor-pointer`}>
                             Strip
                         </div>
