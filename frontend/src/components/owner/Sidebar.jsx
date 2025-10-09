@@ -33,7 +33,7 @@ const Sidebar = () => {
     }, [isOwner])
 
     return (
-        <div>
+        <div className=''>
             <div className='mx-auto max-w-[auto] flex flex-col md:flex-row'>
                 {/* Sidebar */}
                 <div className='max-md:flexCenter flex flex-col justify-between bg-primary sm:m-3 md:min-w-[20%] md:min-h-[97vh] rounded-xl shadow'>
@@ -94,8 +94,8 @@ const Sidebar = () => {
                             {user?.firstName} {user?.lastName}
                         </div>
                     </div>
-
                 </div>
+                <Outlet />
             </div>
         </div>
     );
