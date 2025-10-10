@@ -56,8 +56,8 @@ const AddProduct = () => {
   }
 
   return (
-    <div>
-      <form>
+    <div className='md:px-8 py-6 xl:py-8 m-1.5 sm:m-3 h-[97vh] overflow-y-scroll lg:w-11/12 bg-primary shadow rounded-xl'>
+      <form className='flex flex-col gap-y-3.5 px-2 text-sm w-full lg:w-11/12'>
         <div className='w-full'>
           <h5 className='h5'>Product Name</h5>
           <input type="text" placeholder='Type here...' className='px-3 py-1.5 ring-1 ring-slate-900/10 rounded-lg bg-white text-gray-600 medium-14 mt-1 w-full' />
@@ -69,7 +69,7 @@ const AddProduct = () => {
         <div className="flex gap-4 flex-wrap">
           <dev>
             <h5 className="h5">Category</h5>
-            <select className='w-38 px-3 py-1.5 ring-1 ring-slate-900/10 rounded-lg bg-white text-gray-600 medium-14 mt-1 w-38'>
+            <select className='px-3 py-1.5 ring-1 ring-slate-900/10 rounded-lg bg-white text-gray-600 medium-14 mt-1 w-38'>
               <option value="">Select Category</option>
               {allCataegories.map((cat, index) => (
                 <option key={index} value={cat}>{cat}</option>
