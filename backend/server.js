@@ -5,9 +5,11 @@ import connectDB from "./config/mongodb.js"
 import { clerkMiddleware } from '@clerk/express'
 import clerkWebhooks from "./controllers/ClerkWebhook.js"
 import userRouter from "./routes/userRoute.js"
+import connectCloudinary from "./config/clodinary.js"
 
 
 await connectDB() //Establish connection to the database
+await connectCloudinary //setup cloudinary for image storage
 
 
 const app = express()  // initialize express application
@@ -21,7 +23,8 @@ app.use(clerkMiddleware())
 app.use("/api/clerk", clerkWebhooks)
 
 // define API Routes
-app.use('/api/users', userRouter) // routes for user functionalityu
+app.use('/api/user', userRouter) // routes for user functionality
+app.use('/api/products', userRouter) // routes for handling products
 
 // Route endpoint to check API status
 app.get('/', (req, res) => {
