@@ -1,6 +1,6 @@
 import React from 'react'
 import Hero from '../components/Hero'
-import Features from '../context/features'
+import Features from '../components/features'
 import NewArrivals from '../components/NewArrivals'
 import PopularProducts from '../components/PopularProducts'
 import Testimonial from '../components/Testimonial'

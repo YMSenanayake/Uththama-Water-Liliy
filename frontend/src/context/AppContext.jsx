@@ -1,8 +1,11 @@
-import { useUser } from '@clerk/clerk-react'
+import { useAuth, useUser } from '@clerk/clerk-react'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { dummyProducts } from '../assets/data'
 import toast from 'react-hot-toast'
+import axios from "axios"
+
+axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL
 
 const AppContext = createContext()
 
@@ -16,10 +19,30 @@ export const AppContextProvider = ({ children }) => {
     const navigate = useNavigate()
     const currency = import.meta.env.VITE_CURRENCY
     const delivery_charges = 10; // RS 10
-
-
     // clerk
     const { user } = useUser()
+    const { getToken } = useAuth()
+
+
+
+    // get  the user profile
+    const getUser = async () => {
+        try {
+            const { data } = await axios.get('/api/user', { headers: { Authorization: `Bearer ${await getToken()}` } })
+            if (data.success) {
+                setIsOwner(data.role === "owner")
+                setCartItems(data.cartData || {})
+            } else {
+                //retry fetch user datails after 5 seconds
+                setTimeout(() => {
+                    getUser()
+                }, 5000)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
+
 
     //fetch all products
     const fetchProducts = async () => {
