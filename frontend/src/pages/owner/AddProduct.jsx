@@ -87,21 +87,21 @@ const AddProduct = () => {
       const formData = new FormData()
 
       const prices = {};
-      const sizes = []
+      const sizes = [];
       sizePrices.forEach((sp) => {
-        prices[sp.size] = sp.price
-        sizes.push(sp.size)
+        prices[sp.size] = sp.price;
+        sizes.push(sp.size);
       })
 
       const productData = {
         title: inputs.title,
         description: inputs.description,
-        category: inputs.description,
+        category: inputs.category,
         type: inputs.type,
-        populer: inputs.popular,
-        price: inputs.price,
-        sizes: inputs.sizes,
-      }
+        populer: inputs.populer,
+        price: prices,
+        sizes: sizes,
+      };
 
       formData.append("productData", JSON.stringify(productData))
 

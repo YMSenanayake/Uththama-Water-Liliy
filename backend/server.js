@@ -5,14 +5,14 @@ import connectDB from "./config/mongodb.js"
 import { clerkMiddleware } from '@clerk/express'
 import clerkWebhooks from "./controllers/ClerkWebhook.js"
 import userRouter from "./routes/userRoute.js"
-import connectCloudinary from "./config/clodinary.js"
 import addressRouter from "./routes/addressRoute.js"
 import cartRouter from "./routes/cartRoute.js"
 import productRouter from "./routes/productRoute.js"
+import connectCloudinary from "./config/cloudinary.js"
 
 
 await connectDB() //Establish connection to the database
-await connectCloudinary //setup cloudinary for image storage
+await connectCloudinary() //setup cloudinary for image storage
 
 
 const app = express()  // initialize express application
