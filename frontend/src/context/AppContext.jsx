@@ -15,7 +15,7 @@ export const AppContextProvider = ({ children }) => {
     const [searchQuery, setSearchQuery] = useState("")
     const [cartItems, setCartItems] = useState({})
     const [method, setMethod] = useState("COD")
-    const [isOwner, setIsOwner] = useState(true)
+    const [isOwner, setIsOwner] = useState(false)
     const navigate = useNavigate()
     const currency = import.meta.env.VITE_CURRENCY
     const delivery_charges = 10; // RS 10
@@ -89,6 +89,12 @@ export const AppContextProvider = ({ children }) => {
         }
         return total
     }
+
+    useEffect(() => {
+        if (user) {
+            getUser()
+        }
+    }, [user])
 
     useEffect(() => {
         fetchProducts()
