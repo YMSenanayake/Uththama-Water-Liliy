@@ -17,7 +17,7 @@ const AddProduct = () => {
     description: "",
     category: "",
     type: "",
-    populer: false,
+    popular: false,
   })
 
   const [sizePrices, setSizePrices] = useState([])
@@ -98,7 +98,7 @@ const AddProduct = () => {
         description: inputs.description,
         category: inputs.category,
         type: inputs.type,
-        populer: inputs.populer,
+        popular: inputs.popular,
         price: prices,
         sizes: sizes,
       };
@@ -121,7 +121,7 @@ const AddProduct = () => {
           description: "",
           category: "",
           type: "",
-          populer: false,
+          popular: false,
         })
         setSizePrices([]);
         setImages({
@@ -209,7 +209,7 @@ const AddProduct = () => {
         </div>
         <div className="flex gap-2 mt-3">
           <h5 className='h5'>Add to Popular</h5>
-          <input type="checkbox" checked={inputs.populer} onChange={(e) => setInputs({ ...inputs, populer: e.target.checked })} />
+          <input type="checkbox" checked={inputs.popular} onChange={(e) => setInputs({ ...inputs, popular: e.target.checked })} />
         </div>
         <button type='submit' disabled={loading} className='btn-secondary font-semibold mt-3 p-2 max-w-36 sm:w-full rounded-xl'>
           {loading ? "Adding" : "Add Product"}
