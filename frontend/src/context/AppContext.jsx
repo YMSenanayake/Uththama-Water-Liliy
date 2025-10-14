@@ -95,6 +95,7 @@ export const AppContextProvider = ({ children }) => {
             getUser()
         }
     }, [user])
+    
 
     useEffect(() => {
         fetchProducts()
