@@ -8,6 +8,7 @@ import userRouter from "./routes/userRoute.js"
 import connectCloudinary from "./config/clodinary.js"
 import addressRouter from "./routes/addressRoute.js"
 import cartRouter from "./routes/cartRoute.js"
+import productRouter from "./routes/productRoute.js"
 
 
 await connectDB() //Establish connection to the database
@@ -26,7 +27,7 @@ app.use("/api/clerk", clerkWebhooks)
 
 // define API Routes
 app.use('/api/user', userRouter) // routes for user functionality
-app.use('/api/products', userRouter) // routes for handling products
+app.use('/api/products', productRouter) // routes for handling products
 app.use('/api/addresses', addressRouter) // routes for handling addresses
 app.use('/api/cart', cartRouter) // routes for handling cart
 
