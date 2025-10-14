@@ -28,7 +28,7 @@ export const createProduct = async (req, res) => {
 //contraller function for get product list [GET '/']
 export const listProduct = async (req, res) => {
     try {
-        const products = await product.find({})
+        const products = await Product.find({})
         res.json({success:true, products})
         
     } catch (error) {

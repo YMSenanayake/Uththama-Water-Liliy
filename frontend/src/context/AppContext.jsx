@@ -1,7 +1,6 @@
 import { useAuth, useUser } from '@clerk/clerk-react'
 import React, { createContext, useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import { dummyProducts } from '../assets/data'
 import toast from 'react-hot-toast'
 import axios from "axios"
 
@@ -46,7 +45,17 @@ export const AppContextProvider = ({ children }) => {
 
     //fetch all products
     const fetchProducts = async () => {
-        setProducts(dummyProducts)
+        try {
+            const { data } = await axios.get('/api/products')
+            if(data.success){
+                setProducts(data.products)
+            }else{
+                toast.error(data.message)
+
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
     }
 
     //add product to the cart
