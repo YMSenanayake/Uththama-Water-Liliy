@@ -95,7 +95,7 @@ export const AppContextProvider = ({ children }) => {
             getUser()
         }
     }, [user])
-    
+
 
     useEffect(() => {
         fetchProducts()
@@ -103,7 +103,7 @@ export const AppContextProvider = ({ children }) => {
 
     const value = {
         navigate, user, products, fetchProducts, currency, searchQuery, setSearchQuery, cartItems, setCartItems, method, setMethod,
-        delivery_charges, addToCart, getCartCount, updateQuantity, getCartAmount, isOwner, setIsOwner
+        delivery_charges, addToCart, getCartCount, updateQuantity, getCartAmount, isOwner, setIsOwner, axios, getToken
     }
     return (
         <AppContext.Provider value={value}>{children}</AppContext.Provider>
