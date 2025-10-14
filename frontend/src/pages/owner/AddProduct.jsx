@@ -39,7 +39,7 @@ const AddProduct = () => {
   ]
 
   const addSizePrice = () => {
-    if (!newSize || !newwPrice) {
+    if (!newSize || !newPrice) {
       toast.error("Please enter size and price")
       return
     }
