@@ -8,8 +8,8 @@ const productSchema = new mongoose.Schema({
     images: [{ type: String, required: true }],
     category: { type: String, required: true },
     type: { type: String, required: true },
-    popular: { type: Boolean, required: false },
-    inStock: { type: Boolean, required: false },
+    popular: { type: Boolean, default: false },
+    inStock: { type: Boolean, default: true },
 }, { timestamps: true })
 
 const Product = mongoose.model("Product", productSchema)
