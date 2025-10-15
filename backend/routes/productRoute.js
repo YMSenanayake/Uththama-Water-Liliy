@@ -8,7 +8,7 @@ const productRouter = express.Router()
 productRouter.post('/', upload.array("images", 4), authUser, createProduct)
 productRouter.get('/', listProduct)
 productRouter.get('/single', singleProduct)
-productRouter.get('/toggle-stock', authUser, toggleStock)
+productRouter.post('/toggle-stock', authUser, toggleStock)
 
 
 export default productRouter

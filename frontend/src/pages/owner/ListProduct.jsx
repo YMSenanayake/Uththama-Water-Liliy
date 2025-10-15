@@ -3,7 +3,21 @@ import toast from 'react-hot-toast'
 import { useAppContext } from '../../context/AppContext'
 
 const ListProduct = () => {
-  const { products, currency, fetchProducts } = useAppContext()
+  const { products, currency, fetchProducts, axios, getToken } = useAppContext()
+
+  const toggleStock = async (productId, inStock) => {
+    try {
+      const { data } = await axios.post('/api/products/toggle-stock', { productId, inStock }, { headers: { Authorization: `Bearer ${await getToken()}` } })
+      if (data.success) {
+        fetchProducts()
+        toast.success(data.message)
+      } else {
+        toast.error(data.message)
+      }
+    } catch (error) {
+      toast.error(error.message)
+    }
+  }
 
 
 
@@ -23,12 +37,12 @@ const ListProduct = () => {
             <img src={product.images[0]} alt="" className='w-12 bg-primary rounded' />
             <h5 className='text-sm font-semibold'>{product.title}</h5>
             <p className="text-sm font-semibold">{product.category}</p>
-            <div className="text-sm font-semibold">{currency} {product.price[product.sizes[0]]}</div>
+            <div className="text-sm font-semibold">From {currency} {product.price[product.sizes[0]]}</div>
             <div>
               <label className='relative inline-flex items-center cursor-pointer text-gray-900 gap-3'>
-                <input type="checkbox"  className='sr-only peer' defaultChecked={product.inStock}/>
-                <div className='w-10 h-6 bg-slate-300 rounded-full peer peer-checked:bg-secondary transition-colors duration-200'/>
-                  <span className='absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 ease-in-out peer-checked:translate-x-4'/>
+                <input onClick={() => toggleStock(product._id, !product.inStock)} type="checkbox" className='sr-only peer' defaultChecked={product.inStock} />
+                <div className='w-10 h-6 bg-slate-300 rounded-full peer peer-checked:bg-secondary transition-colors duration-200' />
+                <span className='absolute left-1 top-1 w-4 h-4 bg-white rounded-full transition-transform duration-200 ease-in-out peer-checked:translate-x-4' />
               </label>
             </div>
           </div>
