@@ -1,3 +1,4 @@
+import { isObjectIdOrHexString } from "mongoose";
 import User from "../models/User.js";
 
 
@@ -7,7 +8,7 @@ export const addToCart = async (req, res) => {
         const { itemId, size } = req.body
         const { userId } = req.auth()
         const userData = await User.findById(userId)
-        const cartData = await userData.cartData
+        const cartData = await userData.cartData || {}; //Inirialize if undefined
 
         if (cartData[itemId]) {
             if (cartData[itemId][size]) {
@@ -38,11 +39,16 @@ export const updateCart = async(req, res)=>{
         const {userId} = req.auth()
 
         const userData = await User.findById(userId)
-        const cartData = await userData.cartData
+        const cartData = await userData.cartData || {}; //initialize if undefined
 
         if (quantity <= 0) {
-            delete cartData[itemId]
+            delete cartData[itemId][size] // delete only the specific size
+            // clean up empty itemId objects
+            if(Object.keys(cartData[itemId]).length === 0){
+                delete cartData[itemId]
+            }
         } else {
+            cartData[itemId] = cartData[itemId] || {}
             cartData[itemId][size] = quantity
         }
 
