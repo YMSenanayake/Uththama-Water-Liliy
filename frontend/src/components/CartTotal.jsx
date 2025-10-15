@@ -1,15 +1,36 @@
 import React, { useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 import { useAppContext } from '../context/AppContext'
-import { dummyAddress } from '../assets/data'
 
 const CartTotal = () => {
     const { navigate, currency, method, setMethod,
-        delivery_charges, getCartCount, getCartAmount } = useAppContext()
+        delivery_charges, getCartCount, getCartAmount, axios, getToken } = useAppContext()
 
-    const [addresses, setAddresses] = useState(dummyAddress)
+    const [addresses, setAddresses] = useState([])
     const [showAddress, setShowAddress] = useState(false)
-    const [selectedAddress, setSelectedAddress] = useState(dummyAddress[0])
+    const [selectedAddress, setSelectedAddress] = useState(null)
+
+
+    const getAddress = async () => {
+        try {
+            const { data } = await axios.get('/api/addresses', {
+                headers: { Authorization: `Bearer ${await getToken()}` },
+            });
+
+            if (data.success) {
+                setAddresses(data.addresses);
+                if (data.addresses.length > 0) {
+                    setSelectedAddress(data.addresses[0])
+                }
+            } else {
+                toast.error(error.message);
+            }
+        } catch (error) {
+            toast.error(error.message);
+        }
+    }
+
+
     return (
         <div>
             <h3 className='bold-22'>Order Details <span className='bold-14 text-secondary'>({getCartCount()}) Items</span></h3>
