@@ -20,7 +20,7 @@ export const addToCart = async (req, res) => {
             cartData[itemId][size] = 1
         }
 
-        await User.findByIdAndDelete(userId, { cartData })
+        await User.findByIdAndUpdate(userId, { cartData })
         res.json({ success: true, message: "Added to Cart" })
 
     } catch (error) {
