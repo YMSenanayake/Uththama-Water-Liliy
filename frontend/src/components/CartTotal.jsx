@@ -3,7 +3,7 @@ import toast from 'react-hot-toast'
 import { useAppContext } from '../context/AppContext'
 
 const CartTotal = () => {
-    const { navigate, currency, method, setMethod,
+    const { navigate, currency, method, setMethod, user,
         delivery_charges, getCartCount, getCartAmount, axios, getToken } = useAppContext()
 
     const [addresses, setAddresses] = useState([])
@@ -20,15 +20,22 @@ const CartTotal = () => {
             if (data.success) {
                 setAddresses(data.addresses);
                 if (data.addresses.length > 0) {
-                    setSelectedAddress(data.addresses[0])
+                    setSelectedAddress(data.addresses[0]);
                 }
             } else {
-                toast.error(error.message);
+                toast.error(data.message);
             }
         } catch (error) {
             toast.error(error.message);
         }
-    }
+    };
+
+
+    useEffect(()=> {
+        if(user){
+            getAddress()
+        }
+    }, [user])
 
 
     return (
