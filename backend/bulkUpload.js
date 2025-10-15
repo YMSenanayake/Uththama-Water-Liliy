@@ -157,7 +157,7 @@ cloudinary.config({
 async function bulkUpload() {
     try {
         //connect to mongoDB
-        await mongoose.connect(`${process.env.MONGO_URL}`);
+        await mongoose.connect(`${process.env.MONGO_URI}`);
 
         for (const prod of dummyProducts){
             //upload images to cloudinary
