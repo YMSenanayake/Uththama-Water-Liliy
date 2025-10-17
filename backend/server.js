@@ -9,6 +9,7 @@ import addressRouter from "./routes/addressRoute.js"
 import cartRouter from "./routes/cartRoute.js"
 import productRouter from "./routes/productRoute.js"
 import connectCloudinary from "./config/cloudinary.js"
+import orderRouter from "./routes/orderRoute.js"
 
 
 await connectDB() //Establish connection to the database
@@ -30,6 +31,7 @@ app.use('/api/user', userRouter) // routes for user functionality
 app.use('/api/products', productRouter) // routes for handling products
 app.use('/api/addresses', addressRouter) // routes for handling addresses
 app.use('/api/cart', cartRouter) // routes for handling cart
+app.use('/api/order', orderRouter) // routes for handling order
 
 // Route endpoint to check API status
 app.get('/', (req, res) => {

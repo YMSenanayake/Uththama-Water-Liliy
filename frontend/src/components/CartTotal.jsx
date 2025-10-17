@@ -4,7 +4,7 @@ import { useAppContext } from '../context/AppContext'
 
 const CartTotal = () => {
     const { navigate, currency, method, setMethod, user,
-        delivery_charges, getCartCount, getCartAmount, axios, getToken } = useAppContext()
+        delivery_charges, getCartCount, getCartAmount, cartItems, setCartItems, products, axios, getToken } = useAppContext()
 
     const [addresses, setAddresses] = useState([])
     const [showAddress, setShowAddress] = useState(false)
@@ -30,9 +30,56 @@ const CartTotal = () => {
         }
     };
 
+    const placeOrder = async () => {
+        try {
+            if (!selectedAddress) {
+                return toast.error("Please select an address")
+            }
+            let orderItems = []
+            for (const itemId in cartItems) {
+                for (const size in cartItems[itemId]) {
+                    if (cartItems[itemId][size] > 0) {
+                        const itemInfo = structuredClone(products.find(product => product._id === itemId))
+                        if (itemInfo) {
+                            itemInfo.size = size;
+                            itemInfo.quantity = cartItems[itemId][size];
+                            orderItems.push(itemInfo);
+                        }
+                    }
+                }
+            }
 
-    useEffect(()=> {
-        if(user){
+            // conver orderItems to items array for backend
+            let items = orderItems.map(item => ({
+                productId: item._id,
+                quantity: item.quantity,
+                size: item.size,
+            }))
+
+            // prepare order Using COD
+            if (method === "COD") {
+                const { data } = await axios.post('/api/orders/cod', {
+                    items, address: selectedAddress._id
+                }, {
+                    headers: { Authorization: `Bearer ${await getToken()}` },
+                });
+
+                if (data.success) {
+                    toast.success(data.message);
+                    setCartItems({});
+                    navigate('/my-orders');
+                }
+            }
+
+
+        } catch (error) {
+
+        }
+    }
+
+
+    useEffect(() => {
+        if (user) {
             getAddress()
         }
     }, [user])
