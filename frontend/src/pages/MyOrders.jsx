@@ -1,15 +1,28 @@
 import React, { useEffect, useState } from 'react'
 import Title from '../components/Title'
 import { useAppContext } from '../context/AppContext'
-import { dummyOrdersData } from '../assets/data'
+import axios from 'axios'
 
 const MyOrders = () => {
 
-  const { currency, user } = useAppContext()
+  const { currency, user, axios, getToken } = useAppContext()
   const [orders, setOrders] = useState([])
 
-  const loadOrdersData = () => {
-    setOrders(dummyOrdersData)
+  const loadOrdersData = async () => {
+    if (!user) return
+
+    try {
+      const { data } = await axios.post('/api/orders/userorders', {}, {
+        headers: { Authorization: `Bearer ${await getToken()}` },
+      });
+
+      if (data.success) {
+        setOrders(data.orders);
+      }
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   useEffect(() => {
@@ -82,7 +95,7 @@ const MyOrders = () => {
               <div className='flex items-center gap-2'>
                 <h5 className='medium-14'>Status:</h5>
                 <div className='flex items-center gap-1'>
-                  <span className="min-w-2 h-2 rounded-full bg-green-500"/>
+                  <span className="min-w-2 h-2 rounded-full bg-green-500" />
                   <p>{order.status}</p>
                 </div>
               </div>

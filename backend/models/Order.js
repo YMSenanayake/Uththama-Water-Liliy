@@ -1,15 +1,15 @@
 import mongoose, { Mongoose } from "mongoose";
 
 const orderSchema = new mongoose.Schema({
-    userId: { type: String, required: true, ref: 'user' },
+    userId: { type: String, required: true, ref: 'User' },
     items: [{
-        product: { type: String, required: true, ref: 'product' },
+        product: { type: String, required: true, ref: 'Product' },
         quantity: { type: Number, required: true },
         size: { type: String, required: true },
 
     }],
-    amount: {type:String, required:true},
-    address: {type:String, required:true, ref:'address'},
+    amount: {type:Number, required:true},
+    address: {type:String, required:true, ref:'Address'},
     status: {type:String, default:'Order Placed'},
     paymentMethod: {type:String, required: true},
     isPaid: {type:Boolean, required:true, default:false},
