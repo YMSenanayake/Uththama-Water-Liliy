@@ -1,18 +1,29 @@
 import React, { useEffect, useState } from 'react'
 import { useAppContext } from '../../context/AppContext'
-import { assets, dummyDashboardData } from '../../assets/data'
+import { assets } from '../../assets/data'
 import toast from 'react-hot-toast'
 
 const Dashboard = () => {
-  const { user, currency } = useAppContext()
+  const { user, currency, axios, getToken } = useAppContext()
   const [dashboardData, setDashboardData] = useState({
     orders: [],
     totalOrders: 0,
     totalRevenue: 0,
   })
 
-  const getDashboardData = () => {
-    setDashboardData(dummyDashboardData)
+  const getDashboardData = async () => {
+    try {
+      const {data} = await axios.get('/api/orders/', { headers: { Authorization: `Bearer ${await getToken()}` }, });
+     
+      if (data.success) {
+        setDashboardData(data.dashboardData)
+      } else {
+        toast.error(data.message)
+      }
+
+    } catch (error) {
+      toast.error(error.message)
+    }
   }
 
   useEffect(() => {
