@@ -102,39 +102,57 @@ const Dashboard = () => {
               <div className='flex flex-col gap-2'>
                 <div className='flex items-center gap-x-2'>
                   <h5 className='medium-14'>Order Id:</h5>
-                  <p className='text-gray-400 text-xs break-all'>{order._id}</p>
+                  <p className='text-gray-400 text-sm break-all'>{order._id}</p>
                 </div>
                 <div className='flex gap-4'>
                   <div className='flex items-center gap-x-2'>
-                    <h5 className='medium-14'>Payment Status:</h5>
-                    <p className='text-gray-400 text-sm'>{order.isPaid ? "Done" : "Pending"}</p>
-                    <div className='flex items-center gap-x-2'>
-                      <h5 className='medium-14'>Method:</h5>
-                      <p className='text-gray-400 text-xs'>{order.paymentMethod}</p>
-                    </div>
+                    <h5 className='medium-14'>Customer:</h5>
+                    <p className='text-gray-400 text-sm'>{order.address.firstName} {order.address.lastName}</p>
+                  </div>
+                  <div className='flex items-center gap-x-2'>
+                    <h5 className='medium-14'>Phone:</h5>
+                    <p className='text-gray-400 text-sm'>{order.address.phone}</p>
                   </div>
                 </div>
-                <div className='flex gap-4'>
+                <div className='flex items-center gap-x-2'>
+                  <h5 className='medium-14'>Address:</h5>
+                  <p className='text-gray-400 text-sm'>{order.address.street}, {order.address.city}, {" "}
+                    {order.address.status}, {order.address.country}, {" "}
+                    {order.address.zipcode}
+                  </p>
+                </div>
+                <div className="flex gap-4">
+                  <div className='flex items-center gap-x-2'>
+                    <h5 className='medium-14'>Payment Status:</h5>
+                    <p className='text-gray-400 text-sm'>{order.isPaid ? "Done" : "Pending"}</p>
+                  </div>
+                  <div className='flex items-center gap-x-2'>
+                    <h5 className='medium-14'>Method:</h5>
+                    <p className='text-gray-400 text-sm'>{order.paymentMethod}</p>
+                  </div>
+                </div>
+                <div className="flex gap-4">
                   <div className='flex items-center gap-x-2'>
                     <h5 className='medium-14'>Date:</h5>
                     <p className='text-gray-400 text-sm'>{new Date(order.createdAt).toDateString()}</p>
                   </div>
                   <div className='flex items-center gap-x-2'>
                     <h5 className='medium-14'>Amount:</h5>
-                    <p className='text-gray-400 text-xs'>{currency}{order.amount}</p>
+                    <p className='text-gray-400 text-sm'>{currency}{order.amount}</p>
                   </div>
                 </div>
               </div>
+
               <div className='flex items-center gap-2'>
-                  <h5 className='medium-14'>Status:</h5>
-                  <select onChange={(e)=> statusHandler(e, order._id)} value={order.status} 
-                  className='text-xs font-semibold p-1 ring-1 ring-slate-900/5 rounded max-w-36 bg-primary'>
-                    <option value="Order Placed">Order Placed</option>
-                    <option value="Packing">Packing</option>
-                    <option value="Shipping">Shipping</option>
-                    <option value="Out for delivery">Out for delivery</option>
-                    <option value="Delivered">Delivered</option>
-                  </select>
+                <h5 className='medium-14'>Status:</h5>
+                <select onChange={(e) => statusHandler(e, order._id)} value={order.status}
+                  className='text-sm font-semibold p-1 ring-1 ring-slate-900/5 rounded max-w-36 bg-primary'>
+                  <option value="Order Placed">Order Placed</option>
+                  <option value="Packing">Packing</option>
+                  <option value="Shipping">Shipping</option>
+                  <option value="Out for delivery">Out for delivery</option>
+                  <option value="Delivered">Delivered</option>
+                </select>
               </div>
             </div>
           </div>
