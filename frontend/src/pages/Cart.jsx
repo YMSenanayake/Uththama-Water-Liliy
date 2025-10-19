@@ -71,7 +71,7 @@ const Cart = () => {
                                     </div>
                                 </div>
                                 <div className='text-center bold-16'>{currency}{product.price[item.size] * quantity}.00</div>
-                                <butto onClick={()=> updateQuantity(item._id, item.size, 0)} className='cursor-pointer mx-auto'><img src={assets.cartRemove} alt="" width={22} /></butto>
+                                <button onClick={()=> updateQuantity(item._id, item.size, 0)} className='cursor-pointer mx-auto'><img src={assets.cartRemove} alt="" width={22} /></button>
                             </div>
                         )
                     })}

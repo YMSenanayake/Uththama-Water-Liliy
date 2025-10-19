@@ -42,8 +42,8 @@ const CartTotal = () => {
                         const itemInfo = structuredClone(products.find(product => product._id === itemId))
                         if (itemInfo) {
                             itemInfo.size = size;
-                            itemInfo.quantity = cartItems[itemId][size];
-                            orderItems.push(itemInfo);
+                            itemInfo.quantity = cartItems[itemId][size]
+                            orderItems.push(itemInfo)
                         }
                     }
                 }
@@ -51,12 +51,12 @@ const CartTotal = () => {
 
             // conver orderItems to items array for backend
             let items = orderItems.map(item => ({
-                productId: item._id,
+                product: item._id,
                 quantity: item.quantity,
                 size: item.size,
             }))
 
-            // prepare order Using COD
+            // place order Using COD
             if (method === "COD") {
                 const { data } = await axios.post('/api/orders/cod', {
                     items, address: selectedAddress._id
@@ -68,6 +68,8 @@ const CartTotal = () => {
                     toast.success(data.message);
                     setCartItems({});
                     navigate('/my-orders');
+                } else {
+                    toast.error(data.message);
                 }
             }
 
@@ -139,7 +141,7 @@ const CartTotal = () => {
                     <h4 className='h4'>Total Amount:</h4>
                     <p className='bold-18'>{currency}{getCartAmount() === 0 ? "0.00" : getCartAmount() + delivery_charges}</p>
                 </div>
-                <button className='btn-dark w-full mt-8 !rounded-md'>
+                <button onClick={placeOrder} className='btn-dark w-full mt-8 !rounded-md'>
                     Proceed to Order
                 </button>
             </div>
