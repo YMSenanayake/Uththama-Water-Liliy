@@ -1,10 +1,11 @@
+import transporter from "../config/nodemailer.js";
 import Order from "../models/Order.js";
 import Product from "../models/Product.js"
 import User from "../models/User.js";
 
 
 // global variables for payment
-const currency = "usd"
+const currency = "lkr"
 const delivery_charges = 10 // 10 dollord
 
 
@@ -46,6 +47,32 @@ export const placeOrderCOD = async (req, res) => {
 
         // clear user cart after placing order
         await User.findByIdAndUpdate(userId, { cartData: {} })
+
+        // send confirmation email to the COD
+        const populatedOrder = await Order.findById(order._id).populate('items.product address')
+        const user = await User.findById(userId)
+
+        const productTitles = populatedOrder.items.map(item => items.product?.title || "Unknown").join(", ")
+        const addressString = populatedOrder.address ? `${populatedOrder.address.street || "N/A"}, ${populatedOrder.address.city || "N/A"}, ${populatedOrder.address.state || "N/A"}, ${populatedOrder.address.country || "N/A"}` : "No address";
+
+        const mailOptions = {
+            from: process.env.SMTP_SENDER_EMAIL,
+            to: user.email,
+            subject: "Order Details (COD)",
+            html: `
+             <h2>Your Delivery Details</h2>
+            <p>Thank You for your Order! Below are your Order details:</p>
+            <ul>
+                <li><strong>Order ID:</strong> ${populatedOrder._id}</li>
+                <li><strong>Products Name:</strong> ${productTitles}</li>
+                <li><strong>Address:</strong> ${addressString}</li>
+                <li><strong>Total Amount:</strong> ${process.env.CURRENCY || "Rs "} ${populatedOrder.amount}</li>
+            </ul>
+            <p>You will get your delivery in 1 Day. Pay on delivery charges.</p>
+            `
+        }
+
+        await transporter.sendMail(mailOptions)
 
         return res.json({ success: true, message: "Order Placed" })
 
