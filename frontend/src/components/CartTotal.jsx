@@ -71,11 +71,20 @@ const CartTotal = () => {
                 } else {
                     toast.error(data.message);
                 }
+            } else {
+                const { data } = await axios.post('/api/orders/stripe', {
+                    items, address: selectedAddress._id
+                }, {
+                    headers: { Authorization: `Bearer ${await getToken()}` },
+                });
+                if (data.success) {
+                    window.location.replace(data.url)
+                } else {
+                    toast.error(data.message)
+                }
             }
-
-
         } catch (error) {
-
+            toast.error(error.message)
         }
     }
 
@@ -122,7 +131,7 @@ const CartTotal = () => {
                         </div>
                         <div onClick={() => setMethod("stripe")} className={`${method === "stripe" ? "btn-secondary" : "btn-outline"
                             } !py-1 text-xs cursor-pointer`}>
-                            Strip
+                            Stripe
                         </div>
                     </div>
                 </div>

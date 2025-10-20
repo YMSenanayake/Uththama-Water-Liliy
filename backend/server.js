@@ -10,6 +10,7 @@ import cartRouter from "./routes/cartRoute.js"
 import productRouter from "./routes/productRoute.js"
 import connectCloudinary from "./config/cloudinary.js"
 import orderRouter from "./routes/orderRoute.js"
+import { stripeWebhooks } from "./controllers/stripeWebhooks.js"
 
 
 await connectDB() //Establish connection to the database
@@ -18,6 +19,9 @@ await connectCloudinary() //setup cloudinary for image storage
 
 const app = express()  // initialize express application
 app.use(cors()) //enable cross-Origin resource sharing
+
+// API to listen to stripe webhooks
+app.use("/api/stripe", express.raw({ type: 'application/json' }), stripeWebhooks)
 
 //middleware setup
 app.use(express.json()) // enables json request body parsing
