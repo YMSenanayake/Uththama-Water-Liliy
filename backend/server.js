@@ -13,8 +13,8 @@ import orderRouter from "./routes/orderRoute.js"
 import { stripeWebhooks } from "./controllers/stripeWebhooks.js"
 
 
-await connectDB() //Establish connection to the database
-await connectCloudinary() //setup cloudinary for image storage
+await connectDB(); //Establish connection to the database
+await connectCloudinary() //setup cloudinary for image storage;
 
 
 const app = express()  // initialize express application
