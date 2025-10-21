@@ -7,11 +7,11 @@ import User from "../models/User.js";
 export const stripeWebhooks = async (request, response) => {
     // stripe gateway initialize
     const stripeInstance = new stripe(process.env.STRIPE_SECRET_KEY)
-    const sig = request.headers['stripe-signature']
+    const sig = request.headers['Stripe-signature']
     let event;
     try {
         event = stripeInstance.webhooks.constructEvent(
-            request.rawBody,
+            request.body,
             sig,
             process.env.STRIPE_WEBHOOK_SECRET
         )
@@ -33,7 +33,7 @@ export const stripeWebhooks = async (request, response) => {
         const { orderId, userId } = session.data[0].metadata
 
         //mark order as paid
-        const order = await Order.findByIdAndUpdate(orderId, { isPaid: true })
+        await Order.findByIdAndUpdate(orderId, { isPaid: true })
 
         //clear user cart
         await User.findByIdAndUpdate(userId, { cartData: {} })

@@ -21,7 +21,7 @@ const app = express()  // initialize express application
 app.use(cors()) //enable cross-Origin resource sharing
 
 // API to listen to stripe webhooks
-app.use("/api/stripe", express.raw({ type: 'application/json' }), stripeWebhooks)
+app.post("/api/stripe", express.raw({ type: 'application/json' }), stripeWebhooks)
 
 //middleware setup
 app.use(express.json()) // enables json request body parsing
