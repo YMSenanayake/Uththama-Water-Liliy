@@ -127,7 +127,7 @@ const CartTotal = () => {
                     <div className='flex gap-3'>
                         <div onClick={() => setMethod("COD")} className={`${method === "COD" ? "btn-secondary" : "btn-outline"
                             } !py-1 text-xs cursor-pointer`}>
-                            Cash On Delivery
+                            Bank Transfer
                         </div>
                         <div onClick={() => setMethod("stripe")} className={`${method === "stripe" ? "btn-secondary" : "btn-outline"
                             } !py-1 text-xs cursor-pointer`}>
