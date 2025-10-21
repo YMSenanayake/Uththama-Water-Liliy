@@ -18,7 +18,7 @@ const Processing = () => {
 
     return (
         <div className='flexCenter h-screen'>
-            <div className="animate-spin rounded-full h-24 border-4 border-gray-300 border-t-secondary"/>
+            <div className="animate-spin rounded-full h-24 w-24 border-4 border-gray-300 border-t-secondary"/>
         </div>
     )
 }
