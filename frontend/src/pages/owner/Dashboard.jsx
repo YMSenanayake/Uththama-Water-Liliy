@@ -75,7 +75,7 @@ const Dashboard = () => {
               <div key={idx} className='text-gray-700 flex flex-col lg:flex-row gap-4 mb-3'>
                 <div className='flex flex-[2] gap-x-3'>
                   <div className='flexCenter bg-primary rounded-xl'>
-                    <img src={item.product.images[0]} alt="" className='max-h-20 max-w-20 object-contain' />
+                    <img src={item.product.images?.[0]} alt="" className='max-h-20 max-w-20 object-contain' />
                   </div>
                   <div className="block w-full">
                     <h5 className="h5 uppercase line-clamp-1">{item.product.title}</h5>
